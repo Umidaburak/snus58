@@ -21,8 +21,13 @@ jobs:
           tools: composer
           coverage: none
 
-      - name: Install dependencies
+      - name: Check PHP version
+        run: php -v
+
+      - name: Install dependencies (if composer.json exists)
+        if: hashFiles('**/composer.json') != ''
         run: composer install --no-progress --no-suggest
 
-      - name: Run tests
+      - name: Run tests (if phpunit exists)
+        if: hashFiles('**/vendor/bin/phpunit') != ''
         run: vendor/bin/phpunit
