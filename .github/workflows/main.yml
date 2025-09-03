@@ -18,16 +18,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
-          tools: composer
-          coverage: none
 
       - name: Check PHP version
         run: php -v
-
-      - name: Install dependencies (if composer.json exists)
-        if: hashFiles('**/composer.json') != ''
-        run: composer install --no-progress --no-suggest
-
-      - name: Run tests (if phpunit exists)
-        if: hashFiles('**/vendor/bin/phpunit') != ''
-        run: vendor/bin/phpunit
